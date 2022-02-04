@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Owner;
 use Illuminate\Http\Request;
+use App\Helpers\GeneralHelper;
+use Illuminate\Support\Facades\Redirect;
+
 
 class OwnerController extends Controller
 {
@@ -13,7 +17,9 @@ class OwnerController extends Controller
      */
     public function index()
     {
-        //
+        $owners = Owner::All();
+
+        return view('listOwners', compact('owners'));
     }
 
     /**
@@ -23,7 +29,7 @@ class OwnerController extends Controller
      */
     public function create()
     {
-        //
+        return view('owners');
     }
 
     /**
@@ -32,9 +38,18 @@ class OwnerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function createOwner(Request $request)
     {
-        //
+        if (GeneralHelper::validateIdentification($request['cc'])) {
+            return Redirect::back()->withErrors(['msg' => 'La identificacion ' . $request["cc"] . ' ya esta registrada']);
+        }
+        Owner::create([
+            'nombre' => $request['nombre'],
+            'identificacion' => $request['cc'],
+            'telefono' => $request['telefono']
+        ]);
+
+        return redirect('/owners')->with('success', 'Propietario creado correctamente');
     }
 
     /**
@@ -79,6 +94,8 @@ class OwnerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $owner = Owner::findOrFail($id);
+        $owner->delete();
+        return redirect('/listOwners')->with('success','Propietario eliminado correctamente');
     }
 }

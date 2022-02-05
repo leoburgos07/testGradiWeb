@@ -1,11 +1,14 @@
 @extends('layouts.app')
+@section('home','Gradiweb')
 @section('part','Agregar propietarios')
 @section('link','/owners')
+@section('search','Buscar propietarios')
+@section('link2','/searchOwner')
 @section('title','Propietarios')
 
 @section('content')
 
-<div class="container ">
+<div class="container text-center  ">
     <h2 class="font-weight-bold">Listado de propietarios</h2>
     <table class="table table-responsive">
         <thead>
@@ -22,7 +25,7 @@
                 <td>{{$owner['nombre']}}</td>
                 <td>{{$owner['identificacion']}}</td>
                 <td>{{$owner['telefono']}}</td>
-                <td><a href=""><i class="fas fa-pen-square"></i></a>
+                <td><a href="/editOwner/{{$owner['id']}}"><i class="fas fa-pen-square"></i></a>
                     <a href="/deleteOwner/{{$owner['id']}}"><i class="fas fa-trash-alt"></i></a>
                 </td>
 
@@ -39,10 +42,15 @@
         </tbody>
     </table>
     @if (\Session::has('success'))
-        <p id="msgDelete"class="font-weight-bold text-success">{!! \Session::get('success') !!}</p>
+    <p id="msgDelete" class="font-weight-bold text-success">{!! \Session::get('success') !!}</p>
+    @endif
+    @if($errors->any())
+    <p class="text-danger ">{{$errors->first()}}</p>
     @endif
 
 </div>
+
+
 
 
 

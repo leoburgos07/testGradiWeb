@@ -71,7 +71,8 @@ class OwnerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $owner = Owner::find($id);
+        return view('editOwner', compact('owner'));
     }
 
     /**
@@ -83,7 +84,16 @@ class OwnerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $owner = Owner::find($id);
+        if (GeneralHelper::validateIdentification($request['cc'])) {
+            return Redirect::back()->withErrors(['msg' => 'La identificacion ' . $request["cc"] . ' ya esta registrada']);
+        }
+
+        $owner->nombre = $request->nombre;
+        $owner->identificacion = $request->cc;
+        $owner->telefono = $request->telefono;
+        $owner->save();
+        return redirect('/listOwners')->with('success', 'Propietario editado correctamente');
     }
 
     /**
@@ -94,8 +104,35 @@ class OwnerController extends Controller
      */
     public function destroy($id)
     {
+        if (GeneralHelper::validateOwner($id)) {
+            return redirect()->back()->withErrors(['msg' => 'No se puede eliminar el propietario porque tiene vehículos asociados']);
+        }
+
         $owner = Owner::findOrFail($id);
         $owner->delete();
-        return redirect('/listOwners')->with('success','Propietario eliminado correctamente');
+        return redirect('/listOwners')->with('success', 'Propietario eliminado correctamente');
+    }
+    /**
+     * 
+     */
+    public function search(Request $request)
+    {
+        $owners = Owner::all();
+        $results = [];
+
+
+        foreach ($owners as $owner) {
+            // return strpos(strtolower($owner['nombre']), strtolower($request->nombre));
+            if (strpos(strtolower($owner['nombre']), strtolower($request->nombre)) === false) {
+            } else {
+                array_push($results, $owner);
+            }
+        }
+       
+         return view('results',compact('results'));
+    }
+    public function searchOwner()
+    {
+        return view('searchOwner');
     }
 }

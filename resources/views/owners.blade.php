@@ -1,7 +1,11 @@
 @extends('layouts.app')
+@section('home','Gradiweb')
 @section('part','Listar propietarios')
 @section('link','/listOwners')
+@section('search','Buscar propietarios')
+@section('link2','/searchOwner')
 @section('title','Propietarios')
+
 @section('content')
 
 <div class="container text-center">

@@ -634,7 +634,8 @@ progress {
   padding-left: var(--bs-gutter-x, 0.75rem);
   margin-right: auto;
   margin-left: auto;
-  margin-top: 17%;
+  /* margin-top: 17%; */
+  padding: 10% 21% 0 21%;
 }
 
 @media (min-width: 576px) {
@@ -11286,4 +11287,10 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
+}
+label.text-muted{
+  text-align: left !important;
+}
+.busqueda{
+  padding: 2% 21% 0px !important;
 }

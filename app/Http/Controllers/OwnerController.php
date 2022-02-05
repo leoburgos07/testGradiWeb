@@ -121,7 +121,8 @@ class OwnerController extends Controller
         $results = [];
 
 
-        foreach ($owners as $owner) {
+        foreach ($owners as $owner) 
+        {
             // return strpos(strtolower($owner['nombre']), strtolower($request->nombre));
             if (strpos(strtolower($owner['nombre']), strtolower($request->nombre)) === false) {
             } else {
@@ -134,5 +135,25 @@ class OwnerController extends Controller
     public function searchOwner()
     {
         return view('searchOwner');
+    }
+
+    /**
+     * 
+     */
+    public function searchByIdentification(Request $request)
+    {
+        $owners = Owner::all();
+        $results = [];
+        
+
+        foreach($owners as $owner)
+        {
+             if($owner['identificacion'] === $request->identificacion)
+             {
+                array_push($results, $owner);
+             }
+             
+        }
+        return view('results',compact('results'));
     }
 }

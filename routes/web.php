@@ -25,3 +25,4 @@ Route::get('/editOwner/{id}',[App\Http\Controllers\OwnerController::class, 'edit
 Route::post('/updateOwner/{id}',[App\Http\Controllers\OwnerController::class, 'update']);
 Route::post('/searchNameOwner',[App\Http\Controllers\OwnerController::class, 'search']);
 Route::get('/searchOwner',[App\Http\Controllers\OwnerController::class, 'searchOwner']);
+Route::post('/searchIdentificationOwner',[App\Http\Controllers\OwnerController::class, 'searchByIdentification']);

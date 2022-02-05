@@ -16,13 +16,13 @@ class OwnerSeeder extends Seeder
     {
         Owner::create([
             'nombre' => "Carlos Beltran",
-            "identificacion" => "10830456456",
-            "telefono" => "3154578934"
+            "identificacion" => "1234567897",
+            "telefono" => "1234567895"
         ]);
         Owner::create([
             'nombre' => "Daniel Rodriguez",
-            "identificacion" => "364885129",
-            "telefono" => "315426789"
+            "identificacion" => "1234567899",
+            "telefono" => "1234567892"
         ]);
     }
 }

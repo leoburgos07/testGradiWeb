@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Helpers;
+namespace App\Helpers;
 
 
 use App\Models\Owner;
@@ -23,7 +23,8 @@ class GeneralHelper
         return false;
     }
     
-    public static function validateOwner($id){
+    public static function validateOwner($id)
+    {
         $vehicles = Vehicle::all();
         foreach($vehicles as $vehicle){
             if($id == $vehicle['owner_id']){
@@ -32,4 +33,17 @@ class GeneralHelper
         }
         return false;
     }
+    
+    public static function validatePlate($placa)
+    {
+        $vehicles = Vehicle::All();
+        foreach($vehicles as $vehicle){
+            if($placa == $vehicle['placa']){
+                return true;
+            }
+        }
+        return false;
+    }
+
+   
 }

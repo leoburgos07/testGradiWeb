@@ -1755,3 +1755,43 @@ $("#formOwner").submit(function (e) {
         e.preventDefault();
     }
 });
+
+$("#formVehicle").submit(function (e){
+    let enviar = true;
+    if ($("#placa").val().length < 1 ) {
+        $("#msgPlaca")
+            .text("Este campo no puede ir vacío")
+            .css("color", "red");
+        enviar = false;
+    }else{
+      $("#msgPlaca")
+            .text(" ");
+    }
+    if ($("#marca").val().length < 1 ) {
+        $("#msgMarca")
+            .text("Este campo no puede ir vacío")
+            .css("color", "red");
+        enviar = false;
+    }else{
+      $("#tipo")
+            .text(" ");
+    }
+    if ($("#marca").val().length < 1 ) {
+        $("#msgTipo")
+            .text("Este campo no puede ir vacío")
+            .css("color", "red");
+        enviar = false;
+    }else{
+      $("#msgTipo")
+            .text(" ");
+    }
+    
+    if (enviar) {
+        $("#success")
+            .text("Vehículo registrado con éxito")
+            .css("color", "green");
+    } else {
+        e.preventDefault();
+    }
+
+});

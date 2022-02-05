@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Owner routes
 Route::get('/owners',[App\Http\Controllers\OwnerController::class, 'create']);
 Route::post('/createOwner',[App\Http\Controllers\OwnerController::class, 'createOwner']);
 Route::get('/listOwners', [App\Http\Controllers\OwnerController::class, 'index']);
@@ -26,3 +27,10 @@ Route::post('/updateOwner/{id}',[App\Http\Controllers\OwnerController::class, 'u
 Route::post('/searchNameOwner',[App\Http\Controllers\OwnerController::class, 'search']);
 Route::get('/searchOwner',[App\Http\Controllers\OwnerController::class, 'searchOwner']);
 Route::post('/searchIdentificationOwner',[App\Http\Controllers\OwnerController::class, 'searchByIdentification']);
+
+//Vehicle routes
+Route::get('/vehicles',[App\Http\Controllers\VehicleController::class, 'create']);
+Route::post('/createVehicle',[App\Http\Controllers\VehicleController::class, 'createVehicle']);
+Route::get('/listVehicles',[App\Http\Controllers\VehicleController::class, 'index']);
+Route::get('/deleteVehicle/{id}',[App\Http\Controllers\VehicleController::class, 'destroy']);
+Route::post('/searchVehicle',[App\Http\Controllers\VehicleController::class, 'searchVehicle']);

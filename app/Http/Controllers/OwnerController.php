@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Owner;
 use Illuminate\Http\Request;
 use App\Helpers\GeneralHelper;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 
@@ -50,17 +51,6 @@ class OwnerController extends Controller
         ]);
 
         return redirect('/owners')->with('success', 'Propietario creado correctamente');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -119,18 +109,29 @@ class OwnerController extends Controller
     {
         $owners = Owner::all();
         $results = [];
+        $resultsVehicles = [];
+        
 
 
         foreach ($owners as $owner) 
         {
-            // return strpos(strtolower($owner['nombre']), strtolower($request->nombre));
             if (strpos(strtolower($owner['nombre']), strtolower($request->nombre)) === false) {
             } else {
+                $vehicles = DB::table('vehicles')
+                ->join('owners', 'owners.id', 'vehicles.owner_id')
+                ->select('vehicles.id', 'vehicles.placa as placa', 'vehicles.marca as marca', 'vehicles.tipo as tipo', 'owners.nombre as propietario')
+                ->where('vehicles.owner_id',$owner['id'])
+                ->get();
                 array_push($results, $owner);
+                array_push($resultsVehicles, $vehicles);
             }
+            
         }
        
-         return view('results',compact('results'));
+        return view('results',compact([
+            'results',
+            'resultsVehicles'
+        ]));
     }
     public function searchOwner()
     {
@@ -144,16 +145,27 @@ class OwnerController extends Controller
     {
         $owners = Owner::all();
         $results = [];
+        $resultsVehicles = [];
         
 
         foreach($owners as $owner)
         {
              if($owner['identificacion'] === $request->identificacion)
              {
+                $vehicles = DB::table('vehicles')
+                ->join('owners', 'owners.id', 'vehicles.owner_id')
+                ->select('vehicles.id', 'vehicles.placa as placa', 'vehicles.marca as marca', 'vehicles.tipo as tipo', 'owners.nombre as propietario')
+                ->where('vehicles.owner_id',$owner['id'])
+                ->get();
                 array_push($results, $owner);
+                array_push($resultsVehicles, $vehicles);
              }
              
         }
-        return view('results',compact('results'));
+        
+        return view('results',compact([
+            'results',
+            'resultsVehicles'
+        ]));
     }
 }

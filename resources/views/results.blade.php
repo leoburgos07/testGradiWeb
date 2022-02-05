@@ -30,7 +30,6 @@
                     <td><a href="/editOwner/{{$owner['id']}}"><i class="fas fa-pen-square"></i></a>
                         <a href="/deleteOwner/{{$owner['id']}}"><i class="fas fa-trash-alt"></i></a>
                     </td>
-
                 </tr>
                 @empty
                 <tr>
@@ -49,6 +48,47 @@
         @if($errors->any())
         <p class="text-danger ">{{$errors->first()}}</p>
         @endif
+
+    </div>
+    <div class="row">
+        <h2 class="font-weight-bold" >Vehículos vinculados</h2>
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Placa</th>
+                    <th>Marca</th>
+                    <th>Tipo</th>
+                    <th>Propietario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($resultsVehicles as $vehicle)
+                @for ($i=0;$i<count($vehicle);$i++)
+                    
+                
+                <tr>
+                    <td>{{$vehicle[$i]->placa}}</td>
+                    <td>{{$vehicle[$i]->marca}}</td>
+                    <td>{{$vehicle[$i]->tipo}}</td>
+                    <td>{{$vehicle[$i]->propietario}}</td>
+                    <td>
+                        <a href="/deleteVehicle/{{$vehicle[$i]->id}}"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+
+                </tr>
+                @endfor
+                @empty
+                <tr>
+                    <th>
+                        <h3 class="text-primary">
+                            La persona no posee vehículos.
+                        </h3>
+                    </th>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
 
     </div>
     <a class="btn btn-danger light btn-sl-sm"  type="button" href="/searchOwner"><span class="mr-2"></span>Volver</a>

@@ -15,19 +15,19 @@ class VehicleSeeder extends Seeder
     public function run()
     {
         Vehicle::create([
-            "placa" => "DDD 58f",
+            "placa" => "DDD58f",
             "marca" => ucfirst('mazda'),
             "tipo" => "Deportivo",
             "owner_id" => 1
         ]);
         Vehicle::create([
-            "placa" => "DFR 237",
+            "placa" => "DFR237",
             "marca" => ucfirst('toyota'),
             "tipo" => "Deportivo",
             "owner_id" => 1
         ]);
         Vehicle::create([
-            "placa" => "DSF 583",
+            "placa" => "DSF583",
             "marca" => ucfirst('toyota'),
             "tipo" => "Camioneta",
             "owner_id" => 2

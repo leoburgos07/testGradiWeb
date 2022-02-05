@@ -14,6 +14,7 @@ class Vehicle extends Model
         'placa',
         'marca',
         'tipo',
+        'owner_id'
     ];
 
     public function propietario(){

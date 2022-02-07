@@ -34,3 +34,5 @@ Route::post('/createVehicle',[App\Http\Controllers\VehicleController::class, 'cr
 Route::get('/listVehicles',[App\Http\Controllers\VehicleController::class, 'index']);
 Route::get('/deleteVehicle/{id}',[App\Http\Controllers\VehicleController::class, 'destroy']);
 Route::post('/searchVehicle',[App\Http\Controllers\VehicleController::class, 'searchVehicle']);
+
+Route::get('/newFunctionality',[App\Http\Controllers\NewFuncionalityController::class, 'index']);
